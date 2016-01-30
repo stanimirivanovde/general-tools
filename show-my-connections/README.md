@@ -3,6 +3,6 @@ This tool will list all remote established TCP connections on your computer. By 
 
 ## Usage
 * -h or -?
-** Prints help information
+Prints help information
 * -r
-** Does a WHOIS lookup on the remote IP addresses.
+Does a WHOIS lookup on the remote IP addresses.
