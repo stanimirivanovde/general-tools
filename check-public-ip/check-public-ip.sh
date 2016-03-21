@@ -9,8 +9,8 @@ function getIp {
 
 function sendMail {
 	message="$1"
-	printf "Sending the following message:\nFrom: pradqdo@yahoo.com\nTo: pradqdo@yahoo.com\nSubject: IP Address Change\n\n${message}"
-	printf "From: pradqdo@yahoo.com\nTo: pradqdo@yahoo.com\nSubject: IP Address Change\n\n$message" | /usr/local/sbin/ssmtp pradqdo@yahoo.com
+	printf "Sending the following message:\nFrom: example@yahoo.com\nTo: example@yahoo.com\nSubject: IP Address Change\n\n${message}"
+	printf "From: example@yahoo.com\nTo: example@yahoo.com\nSubject: IP Address Change\n\n$message" | /usr/local/sbin/ssmtp example@yahoo.com
 }
 
 # The file that stores our last valid public IP address
