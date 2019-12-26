@@ -7,5 +7,5 @@ This is a tool to list the current established connections your computer has to 
 ## check-public-ip (FreeBSD / FreeNAS)
 Checks the public IP of your computer/server and sends you an e-mail if it has changed. You'll need to have ssmtp installed and configured correctly. A sample ssmtp.conf file is included for Yahoo e-mails.
 
-## brew-upgrade
+## brew-upgrade (Mac OS X)
 Upgrades all brew packages including the casks and cleans up afterwards.
