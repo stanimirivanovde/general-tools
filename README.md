@@ -9,3 +9,6 @@ Checks the public IP of your computer/server and sends you an e-mail if it has c
 
 ## brew-upgrade (Mac OS X)
 Upgrades all brew packages including the casks and cleans up afterwards.
+
+## list-dns (Mac OS X)
+Lists all configured DNS servers on each network connection. This is useful when using something like dnscrypt-proxy or stubby to make sure that your local DNS is set to localhost on all of your connections.
