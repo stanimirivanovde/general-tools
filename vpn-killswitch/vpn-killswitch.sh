@@ -27,7 +27,7 @@ if [ "${ENABLE}" -eq 1 ]; then
 	sudo pfctl -d
 
 	# Load the rules
-	sudo pfctl -f ./killswitch.v2.pf.conf
+	sudo pfctl -f ~/openvpn/killswitch.v2.pf.conf
 
 	# Enable the firewall
 	sudo pfctl -e
