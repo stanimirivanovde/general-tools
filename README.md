@@ -12,3 +12,6 @@ Upgrades all brew packages including the casks and cleans up afterwards.
 
 ## list-dns (Mac OS X)
 Lists all configured DNS servers on each network connection. This is useful when using something like dnscrypt-proxy or stubby to make sure that your local DNS is set to localhost on all of your connections.
+
+## vpn-killswitch (Mac OS X)
+Configures a VPN killswitch that only allows traffic to a single IP address (the VPN IP address).
