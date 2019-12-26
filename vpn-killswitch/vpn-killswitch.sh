@@ -40,17 +40,17 @@ fi
 if [[ "${TEST}" -eq 1 ]]; then
 	# Make sure this is routed correctly
 	echo ""
+	echo "Pinging..."
+	ping -c 2 1.1.1.1
+	sleep 1s
+	ping -c 2 8.8.8.8
+
+	echo ""
 	echo "Tracing..."
 	traceroute -m 4 google.com
 	sleep 1s
 	traceroute -m 4 yahoo.com
 	sleep 1s
-
-	echo ""
-	echo "Pinging..."
-	ping -c 2 1.1.1.1
-	sleep 1s
-	ping -c 2 8.8.8.8
 
 	echo ""
 
