@@ -10,8 +10,8 @@ Checks the public IP of your computer/server and sends you an e-mail if it has c
 ## brew-upgrade (Mac OS X)
 Upgrades all brew packages including the casks and cleans up afterwards.
 
-## list-dns (Mac OS X)
-Lists all configured DNS servers on each network connection. This is useful when using something like dnscrypt-proxy or stubby to make sure that your local DNS is set to localhost on all of your connections.
+## local-dns (Mac OS X)
+Tools to list and set local DNS server on Mac OS X. This is useful if you want to run your own stubby or dnscrypt-proxy servers on the localhost to enable DNS over HTTPS OR TLS (DOH, DOT).
 
 ## vpn-killswitch (Mac OS X)
 Configures a VPN killswitch that only allows traffic to a single IP address (the VPN IP address).
