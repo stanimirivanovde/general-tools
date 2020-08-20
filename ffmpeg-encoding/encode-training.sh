@@ -24,6 +24,7 @@ fi
 
 # Encode an ffmpeg video
 # -crf controls the quality. Lower values = better quality. 23-28 should be good compromise
-# -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower etc.
-# Audio is copied directly
-ffmpeg -i $inputFile -vcodec libx264 -acodec copy -crf 23 -preset medium $outputFile
+# -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
+# Audio is aac with 128k bitrate
+# Video is scaled to 1080p with 1920 width and calculated height based on the original resolution
+ffmpeg -i "$inputFile" -vcodec libx264 -c:a aac -b:a 128k -vf "scale=1920:-2" -crf 23 -preset veryslow "$outputFile"
