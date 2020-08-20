@@ -15,3 +15,6 @@ Tools to list and set local DNS server on Mac OS X. This is useful if you want t
 
 ## vpn-killswitch (Mac OS X)
 Configures a VPN killswitch that only allows traffic to a single IP address (the VPN IP address).
+
+## docker-tools
+Various docker tools to help with administrating docker containers
