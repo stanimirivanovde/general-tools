@@ -18,3 +18,6 @@ Configures a VPN killswitch that only allows traffic to a single IP address (the
 
 ## docker-tools
 Various docker tools to help with administrating docker containers
+
+## ffmpeg-encoding
+Vairous encoding helper scripts
