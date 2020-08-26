@@ -1,9 +1,8 @@
 #!/bin/bash
 
-# This is a helper script to encode a video training such as a screen recording.
+# This is a helper script to encode a video trainings such as a screen recording.
 # It should produce a well compressed video size using the commong libx264 library.
-# The video quality should be very good.
-# # Audio is copied directly.
+# The video quality should be very good. Audio is 128kb.
 
 inputFile=$1
 outputFile=$2
@@ -54,5 +53,11 @@ fi
 #    Choose the highest CRF value that still provides an acceptable quality. If the output looks good, then try a higher value.
 #    If it looks bad, choose a lower value.
 # -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
+#    Go with the slowest preset you can tolerate. -veryslow is the slowest usable that gives the best quality for compression.
 # -tune controls extra tunning parameters. Valid values are: film, animation, grain, stillimage, fastdecode, zerolatency
-ffmpeg -i "$inputFile" -vcodec libx264 -c:a aac -b:a 128k -vf "scale=${width}:-2" -crf 30 -preset slower -tune stillimage "$outputFile"
+command="ffmpeg -i '$inputFile' -vcodec libx264 -c:a aac -b:a 128k -vf 'scale=${width}:-2' -crf 30 -preset veryslow -tune stillimage '$outputFile'"
+
+echo "Running FFMpeg encoding:"
+echo $command
+echo "..."
+eval $command
