@@ -9,7 +9,7 @@ inputFile=$1
 outputFile=$2
 resolutionString=$3
 
-usageString="Usage: $0 inputFile outputFile resolution(1080p or 720p)"
+usageString="Usage: $0 inputFile outputFile resolution(optional: 1080p or 720p. Default width 1600px)"
 
 if [ -z "$inputFile" ]; then
 	echo "No input file."
@@ -23,25 +23,36 @@ if [ -z "$outputFile" ]; then
 	exit 1
 fi
 
+# Default to 1600 - crisper text on a 15" Mac
+width=1600
 if [ -z "$resolutionString" ]; then
-	resolution="1080p"
-fi
-
-if [ "${resolutionString}" != "1080p" ] && [ "${resolutionString}" != "720p" ]; then
+	width=1600
+elif [ "${resolutionString}" != "1080p" ] && [ "${resolutionString}" != "720p" ]; then
 	echo "Bad resolution."
 	echo $usageString
 	exit 1
+elif [ "${resolutionString}" == "1080p" ]; then
+	width=1920
+elif [ "${resolutionString}" == "720p" ]; then
+	width=1280
 fi
 
-# Default to 720p
-width=1280
-if [ "${resolutionString}" == "1080p" ]; then
-	width=1920
-fi
+# Pre-testing your settings
+# Encode a random section instead of the whole video with the -ss and -t/-to options to quickly get a general idea of what the output will look like.
+#  -ss: Offset time from beginning. Value can be in seconds or HH:MM:SS format.
+#  -t: Duration. Value can be in seconds or HH:MM:SS format.
+#  -to: Stop writing the output at specified position. Value can be in seconds or HH:MM:SS format.
 
 # Encode an ffmpeg video
-# -crf controls the quality. Lower values = better quality. 23-28 should be good compromise
-# -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
+# -vcodec uses x264 codec. For reference of all the options check: https://trac.ffmpeg.org/wiki/Encode/H.264
 # Audio is aac with 128k bitrate
-# Video is scaled to 1080p with 1920 width and calculated height based on the original resolution
-ffmpeg -i "$inputFile" -vcodec libx264 -c:a aac -b:a 128k -vf "scale=${width}:-2" -crf 23 -preset medium "$outputFile"
+# scale is controlled by the width with automatic height calculation
+# -crf controls the quality. Lower values = better quality. 23-28 should be good compromise.
+#    The range of the CRF scale is 0–51, where 0 is lossless, 23 is the default, and 51 is worst quality possible.
+#    A lower value generally leads to higher quality, and a subjectively sane range is 17–28. Consider 17 or 18 to be
+#    visually lossless or nearly so; it should look the same or nearly the same as the input but it isn't technically lossless.
+#    Choose the highest CRF value that still provides an acceptable quality. If the output looks good, then try a higher value.
+#    If it looks bad, choose a lower value.
+# -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
+# -tune controls extra tunning parameters. Valid values are: film, animation, grain, stillimage, fastdecode, zerolatency
+ffmpeg -i "$inputFile" -vcodec libx264 -c:a aac -b:a 128k -vf "scale=${width}:-2" -crf 30 -preset slower -tune stillimage "$outputFile"
