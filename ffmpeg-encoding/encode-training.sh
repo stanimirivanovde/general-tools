@@ -55,9 +55,14 @@ fi
 # -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
 #    Go with the slowest preset you can tolerate. -veryslow is the slowest usable that gives the best quality for compression.
 # -tune controls extra tunning parameters. Valid values are: film, animation, grain, stillimage, fastdecode, zerolatency
+
+# File Size Considerations
+#    Go with higher crf settings and lower resolution (width) in order to decrease the size.
+#    Currently the size is optimized to be less than 350MB for 1h 30min video.
+
 command="ffmpeg -i '$inputFile' -vcodec libx264 -c:a aac -b:a 128k -vf 'scale=${width}:-2' -crf 30 -preset veryslow -tune stillimage '$outputFile'"
 
-echo "Running FFMpeg encoding:"
+echo "Running ffmpeg encoding:"
 echo $command
 echo "..."
 eval $command
