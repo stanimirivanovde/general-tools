@@ -17,7 +17,7 @@ cat $filesToUpgrade
 toUpdate=$( cat $filesToUpgrade | cut -d' ' -f 1 | tr '\n' ' ' )
 echo "Upgrading packages: ${toUpdate[@]}"
 ./mac-notification.py -t "Upgrading Packages" -m "The following applications will be upgraded: ${toUpdate[@]}"
-brew cask reinstall ${toUpdate[@]}
+brew reinstall ${toUpdate[@]}
 if [ $? -ne "0" ]; then
 	echo "Failed to upgrade the casks."
 	./mac-notification.py -t "Upgrade Error" -m "There was an error upgrading the applications."
