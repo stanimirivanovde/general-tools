@@ -10,7 +10,7 @@ if __name__=="__main__":
     print(f"Timer started with timeout of {timeout} seconds")
     notification.notify( 
             title = "Timer Started",
-            message=f"Starting a timer of {timeout} seconds and counting down",
+            message=f"Starting a timer of {timeout} secs",
             app_name=sys.argv[0],
 
             # Lets display this for 10 seconds
@@ -21,7 +21,7 @@ if __name__=="__main__":
 
     notification.notify( 
             title = "Timeout",
-            message=f"{timeout} seconds has passed",
+            message=f"{timeout} seconds have passed",
             app_name=sys.argv[0],
 
             # Lets display this for 10 minutes
