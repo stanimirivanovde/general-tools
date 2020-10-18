@@ -21,3 +21,6 @@ Various docker tools to help with administrating docker containers
 
 ## ffmpeg-encoding
 Vairous encoding helper scripts
+
+## desktop-timer
+Desktop timer that creates an OS notification when the timer starts and ends.

@@ -3,3 +3,9 @@ Displays a timeout notification after a specific time has passed. You can add an
 
 # Usage
 python3 desktop-timer.py \<timeout in seconds\>
+
+# Dependencies
+Make sure to install the following dependencies
+
+pip3 install plyer
+pip3 install git+http://github.com/kivy/pyobjus/
