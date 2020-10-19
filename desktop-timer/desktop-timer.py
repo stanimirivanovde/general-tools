@@ -28,7 +28,17 @@ if __name__=="__main__":
                 timeout=2,
                 ticker="this is the ticker"
         )
-        time.sleep(timeout)
+
+        # Print progress every 1 min
+        secondsInMinute = 60
+        numberOfMinutes = (int)(timeout / secondsInMinute)
+        for i in range(numberOfMinutes):
+            time.sleep(secondsInMinute)
+            print(f"Elapsed time: {i + 1} minutes out of {numberOfMinutes} minutes")
+
+        # Take any risidual amount of time into consideration
+        risidualTime = timeout - (numberOfMinutes * secondsInMinute)
+        time.sleep(risidualTime)
 
         notification.notify(
                 title = f"Timeout {name}",
