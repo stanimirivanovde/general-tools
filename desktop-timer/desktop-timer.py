@@ -6,28 +6,41 @@ import sys
 from plyer import notification 
 
 if __name__=="__main__": 
-    timeout = (int)(sys.argv[1])
-    print(f"Timer started with timeout of {timeout} seconds")
-    notification.notify( 
-            title = "Timer Started",
-            message=f"Starting a timer of {timeout} secs",
-            app_name=sys.argv[0],
+    app_name=sys.argv[0]
+    usage_string = f"Usage: {app_name} <timer name> <timeout in seconds>"
+    try:
+        if len(sys.argv) < 3:
+            print("Missing arguments.")
+            print(usage_string)
+            sys.exit(1)
+        name = sys.argv[1]
+        timeout = (int)(sys.argv[2])
+        if name is None or timeout is None:
+            print(f"Usage: {app_name} <timer name> <timeout in seconds>")
+            sys.exit(1)
+        print(f"Timer {name} started with timeout: {timeout} seconds")
+        notification.notify(
+                title = f"Timer {name}",
+                message=f"Counting {timeout} secs",
+                app_name=app_name,
 
-            # Lets display this for 10 seconds
-            timeout=2,
-            ticker="this is the ticker"
-    ) 
-    time.sleep(timeout)
+                # Lets display this for 10 seconds
+                timeout=2,
+                ticker="this is the ticker"
+        )
+        time.sleep(timeout)
 
-    notification.notify( 
-            title = "Timeout",
-            message=f"{timeout} seconds have passed",
-            app_name=sys.argv[0],
+        notification.notify(
+                title = f"Timeout {name}",
+                message=f"{timeout} seconds have passed",
+                app_name=sys.argv[0],
 
-            # Lets display this for 10 minutes
-            timeout=2,
-            ticker="this is the ticker"
-    ) 
-    # waiting time 
-    #time.sleep(600)
+                # Lets display this for 10 minutes
+                timeout=2,
+                ticker="this is the ticker"
+        )
+    except Exception as e:
+        print(e)
+        print(f"Usage: {app_name} <timer name> <timeout in seconds>")
+        sys.exit(1)
 
