@@ -51,7 +51,7 @@ fi
 #    Choose the highest CRF value that still provides an acceptable quality. If the output looks good, then try a higher value.
 #    If it looks bad, choose a lower value.
 # scale is controlled by the width with automatic height calculation
-# use 24 fps. Normally a screen recording might use ~ 60 fps which is too much. This will improve the encoding speed
+# use 5 fps. Normally a screen recording might use ~ 60 fps which is too much. This will improve the encoding speed and the final file size.
 # Audio is aac with 128k bitrate. Quicktime on Mac OS X doesn't like mp3 even though it results in a better file size.
 # -preset controls compression. The faster the less compression applied. Allowed values: ultrafast, superfast, faster, fast, medium, slow, slower, veryslow etc.
 #    Go with the slowest preset you can tolerate. -veryslow is the slowest usable that gives the best quality for compression.
@@ -62,7 +62,7 @@ fi
 #    Go with higher crf settings and lower resolution (width) in order to decrease the size.
 #    Currently the size is optimized to be less than 350MB for 1h 30min video.
 
-command="ffmpeg -i '$inputFile' -vcodec "libx264" -crf 32 -vf 'scale=${width}:-2,fps=24' -c:a aac -b:a 128k -preset veryslow -profile:v high -tune stillimage -f mp4 '$outputFile'"
+command="ffmpeg -i '$inputFile' -vcodec "libx264" -crf 32 -vf 'scale=${width}:-2,fps=5' -c:a aac -b:a 128k -preset veryslow -profile:v high -tune stillimage -f mp4 '$outputFile'"
 
 echo "Running ffmpeg encoding:"
 echo $command
