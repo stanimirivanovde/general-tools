@@ -16,6 +16,10 @@ cat $filesToUpgrade
 # Extract only the package name without the version
 toUpdate=$( cat $filesToUpgrade | cut -d' ' -f 1 | tr '\n' ' ' )
 echo "Upgrading packages: ${toUpdate[@]}"
+if [ -z "$toUpdate" ]; then
+	echo "No packages to upgrade."
+	exit
+fi
 ./mac-notification.py -t "Upgrading Packages" -m "The following applications will be upgraded: ${toUpdate[@]}"
 brew reinstall ${toUpdate[@]}
 if [ $? -ne "0" ]; then
