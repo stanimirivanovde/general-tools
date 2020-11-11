@@ -1,6 +1,9 @@
 #!/bin/bash
 # This script will upgrade homebrew packages, including the casks
 
+# Upgrade Mac OS X Software
+softwareupdate --all --install
+
 # Disable analytics sharing
 brew analytics off
 
