@@ -1,4 +1,4 @@
-#!/usr/local/bin/python
+#!/usr/local/bin/python3
 
 # This script is used to display a Mac OS X notification
 # In order to make the notification sticky (alerts) you should

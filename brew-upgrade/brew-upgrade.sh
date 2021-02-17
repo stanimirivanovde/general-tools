@@ -4,6 +4,17 @@
 # Upgrade Mac OS X Software
 softwareupdate --all --install
 
+# Make sure that mas is installed: https://github.com/mas-cli/mas
+# It helps us manage App Store apps
+brew install mas
+masOutdated=$(mas outdated)
+if [ -n "$masOutdated" ]; then
+	./mac-notification.py -t "App Store Packages" -m "$masOutdated"
+	mas upgrade
+else
+	echo "No App Store packages need to be upgraded $masOutdated"
+fi
+
 # Disable analytics sharing
 brew analytics off
 
@@ -24,13 +35,12 @@ if [ -z "$toUpdate" ]; then
 	exit
 fi
 ./mac-notification.py -t "Upgrading Packages" -m "The following applications will be upgraded: ${toUpdate[@]}"
-brew upgrade --casks --greedy
+brew upgrade --greedy --casks && brew cleanup
 if [ $? -ne "0" ]; then
 	echo "Failed to upgrade the casks."
 	./mac-notification.py -t "Upgrade Error" -m "There was an error upgrading the applications."
 	exit 1
 fi
-brew cleanup
 echo "Upgraded the following casks:"
 cat $filesToUpgrade
 ./mac-notification.py -t "Upgrade Complete" -m "The following applications were upgraded: ${toUpdate[@]}"
