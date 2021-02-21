@@ -15,6 +15,10 @@ else
 	echo "No App Store packages need to be upgraded $masOutdated"
 fi
 
+# This installs helper software for building packages on Mac OS X
+# For example python requires it if we're going to build it from source.
+xcode-select --install
+
 # Disable analytics sharing
 brew analytics off
 
@@ -44,3 +48,5 @@ fi
 echo "Upgraded the following casks:"
 cat $filesToUpgrade
 ./mac-notification.py -t "Upgrade Complete" -m "The following applications were upgraded: ${toUpdate[@]}"
+
+brew doctor
