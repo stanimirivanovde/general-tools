@@ -38,6 +38,7 @@ fi
 # -vf mpdecimate will drop all duplicate frames. This is very important in order to decrease the size of a screen share. Most of the
 #     frames will be duplicated since the screen is mostly static. This way we'll save on file size and speed up the encoding as well
 #     while preserving the original resolution.
+# -vf format=yuv420p is used to convert 10bit x265 input video to 8bit x264. This is needed in order for Quicktime to properly recognize the file.
 # -vsync vfr tells ffmpeg that we're going to have variable frame rate. This is important in order to sync the video and audio after
 #     we've dropped all the duplilcate frames. For each dropped frame the video length will decrease causing the audio and video
 #     to be increasingly out of sync.
@@ -47,7 +48,7 @@ fi
 # -profile controls x264 profile settings. main is used for maximum compatibility but high provides better encoding speeds and output file size.
 # -tune controls extra tunning parameters. Valid values are: film, animation, grain, stillimage, fastdecode, zerolatency
 
-command="ffmpeg -i '$inputFile' -vcodec "libx264" -crf 36 -vf mpdecimate -vsync vfr -c:a aac -b:a 128k -preset veryslow -profile:v high -tune stillimage -f mp4 '$outputFile'"
+command="ffmpeg -i '$inputFile' -vcodec "libx264" -crf 36 -vf mpdecimate -vf format=yuv420p -vsync vfr -c:a aac -b:a 128k -preset medium -profile:v high -tune stillimage -f mp4 '$outputFile'"
 
 echo "Running ffmpeg encoding:"
 echo $command
