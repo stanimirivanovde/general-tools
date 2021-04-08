@@ -22,7 +22,7 @@ xcode-select --install
 # Disable analytics sharing
 brew analytics off
 
-brew update && brew upgrade && brew cleanup
+brew update && brew upgrade --greedy && brew cleanup
 if [ $? -ne "0" ]; then
 	echo "Failed to update brew."
 	exit 1;
