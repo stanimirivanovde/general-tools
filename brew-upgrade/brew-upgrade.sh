@@ -4,23 +4,19 @@
 # Upgrade Mac OS X Software
 softwareupdate --all --install
 
+# Disable analytics sharing
+brew analytics off
+
 # Make sure that mas is installed: https://github.com/mas-cli/mas
 # It helps us manage App Store apps
 brew install mas
-masOutdated=$(mas outdated)
-if [ -n "$masOutdated" ]; then
-	./mac-notification.py -t "App Store Packages" -m "$masOutdated"
-	mas upgrade
-else
-	echo "No App Store packages need to be upgraded $masOutdated"
-fi
+brew upgrade mas
+brew link mas
+mas upgrade
 
 # This installs helper software for building packages on Mac OS X
 # For example python requires it if we're going to build it from source.
 xcode-select --install
-
-# Disable analytics sharing
-brew analytics off
 
 brew update && brew upgrade --greedy && brew cleanup
 if [ $? -ne "0" ]; then

@@ -24,3 +24,6 @@ Vairous encoding helper scripts
 
 ## desktop-timer
 Desktop timer that creates an OS notification when the timer starts and ends.
+
+## badblocks
+Reads a hard disk for bad blocks. Uses the badblocks linux utility optimized for speed.
