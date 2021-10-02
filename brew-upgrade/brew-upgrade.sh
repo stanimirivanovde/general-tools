@@ -2,7 +2,7 @@
 # This script will upgrade homebrew packages, including the casks
 
 # Upgrade Mac OS X Software
-softwareupdate --all --install
+softwareupdate --all --install --force
 
 # Disable analytics sharing
 brew analytics off
@@ -18,7 +18,8 @@ mas upgrade
 # For example python requires it if we're going to build it from source.
 xcode-select --install
 
-brew update && brew upgrade --greedy && brew cleanup
+#brew update && brew upgrade --greedy && brew cleanup
+brew update && brew upgrade && brew cleanup
 if [ $? -ne "0" ]; then
 	echo "Failed to update brew."
 	exit 1;
@@ -40,9 +41,11 @@ if [ $? -ne "0" ]; then
 	echo "Failed to upgrade the casks."
 	./mac-notification.py -t "Upgrade Error" -m "There was an error upgrading the applications."
 	exit 1
+else
+	echo "Upgraded the following casks:"
+	cat $filesToUpgrade
+	./mac-notification.py -t "Upgrade Complete" -m "The following applications were upgraded: ${toUpdate[@]}"
 fi
-echo "Upgraded the following casks:"
-cat $filesToUpgrade
-./mac-notification.py -t "Upgrade Complete" -m "The following applications were upgraded: ${toUpdate[@]}"
 
+echo Running brew doctor
 brew doctor
