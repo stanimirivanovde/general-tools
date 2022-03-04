@@ -9,6 +9,41 @@ Usage: ./encode-screen-recording.sh inputFile outputFile
 ```
 Just specify the input file and the output file and the conversion should start. Look inside the script if you'd like to modify any of the parameters.
 
+## list-hdr-info-from-source-video.sh
+This is a convinient script to extract the relevant HDR parameters from a source video so you can convert it successfully. It uses ffprobe's JSON output and parses the arguments. It constructs an -x265-params that can be passed directly to ffmpeg. You can paste it in ffmpeg-hdr-encode.sh file to get this working
+
+```
+list-hdr-info-from-source-video.sh SOURCE_VIDEO
+```
+
+## list-all-av-streams.sh
+This lists all Streams and their IDs from the source video. You can use it to discovery all streams and their IDs so you can correctly map it if needed. You can preserve only the streams you care about such as the main video stream and one of the audio streams. For Plex' Direct Streaming to work it gets picky with some of the subtitle streams. If they are removed then the file plays correctly. In order to save only particular streams in a converted video you can use this
+
+```
+ffmpeg -i $i -map 0:0 -map 0:1 -codec copy $i.mkv
+```
+
+This will select stream 0 (video) and stream 1 (audio) and put it in an mkv file.
+
+## ffmpeg-hdr-encdoe.sh
+Encodes a video preserving HDR contents and using libx265, hardware accelerated videotoolbox on Mac or direct copy. You need to modify the script to setup the stream mappings. The mapping IDs
+can be retrieved from ffmpeg itself:
+
+```
+ffmpeg -i SOURCE_VIDEO 2>&1 | less
+```
+
+Once you chose the mappings to keep you can update the script and change the -map:0:1/2/3..n options. And then run the conversion as such:
+
+```
+ffmpeg-hdr-encode.sh SOURCE_VIDEO DESTINATION_VIDEO 1/2/3
+```
+
+Where the last parameters mean:
+1. Convert using libx265 (best quality and smallest file size but slowest to execute)
+2. Convert using hardware accelerated videotoolbox on Mac OS X (faster but less customizations and worse quality than 1)
+3. Copy the streams directly (best quality and fastest but largest file)
+
 ## Quality Parameters
 **-vcodec libx264**
 For reference of all the options check: https://trac.ffmpeg.org/wiki/Encode/H.264
