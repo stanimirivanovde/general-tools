@@ -36,7 +36,7 @@ if [ -z "$toUpdate" ]; then
 	exit
 fi
 ./mac-notification.py -t "Upgrading Packages" -m "The following applications will be upgraded: ${toUpdate[@]}"
-brew upgrade --greedy --casks && brew cleanup
+brew upgrade --casks --greedy && brew cleanup
 if [ $? -ne "0" ]; then
 	echo "Failed to upgrade the casks."
 	./mac-notification.py -t "Upgrade Error" -m "There was an error upgrading the applications."

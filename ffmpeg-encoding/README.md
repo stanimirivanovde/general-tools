@@ -73,3 +73,12 @@ This controls x264 profile settings. main is used for maximum compatibility but 
 
 **-tune**
 This controls extra tunning parameters. Valid values are: film, animation, grain, stillimage, fastdecode, zerolatency
+
+## replace-audio.sh
+Replaces the audio track of a video file with the provided audio file. This is useful if you want to enhance the audio track of a video file and then replace it in the original video.
+
+```
+./replace-audio VIDEO_FILE AUDIO_FILE
+```
+
+The result will be saved in the same location as the video file.
