@@ -82,3 +82,6 @@ Replaces the audio track of a video file with the provided audio file. This is u
 ```
 
 The result will be saved in the same location as the video file.
+
+## encode-music-video.sh
+Re-encodes a music video by copying the audio and compressing the video while preserving the general quality of the video.
