@@ -14,15 +14,15 @@ function print_help {
 
 source=$1
 destination=$2
-if [ -z $source ]; then
+if [ -z "$source" ]; then
 	echo "Missing source video"
 	print_help $0
 fi
 
-if [ -z $destination ]; then
+if [ -z "$destination" ]; then
 	echo "Missing desitnation video"
 	print_help $0
 fi
 
 set -x
-ffmpeg -i $source -vcodec libx264 -crf 24 -c:a copy -preset veryslow -profile:v high -pix_fmt yuv420p -f mp4 $destination
+ffmpeg -i "$source" -vcodec libx264 -crf 24 -c:a aac -b:a 256k -preset veryslow -profile:v high -pix_fmt yuv420p -f mp4 "$destination"
